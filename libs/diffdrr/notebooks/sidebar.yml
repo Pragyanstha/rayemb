@@ -1,0 +1,23 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - section: api
+        contents:
+          - api/00_drr.ipynb
+          - api/01_renderers.ipynb
+          - api/02_detector.ipynb
+          - api/03_data.ipynb
+          - api/04_visualization.ipynb
+          - api/05_metrics.ipynb
+          - api/06_pose.ipynb
+          - api/07_utils.ipynb
+      - section: tutorials
+        contents:
+          - tutorials/introduction.ipynb
+          - tutorials/optimizers.ipynb
+          - tutorials/visualization.ipynb
+          - tutorials/metrics.ipynb
+          - tutorials/spherical.ipynb
+          - tutorials/timing.ipynb
+          - tutorials/metamorphasis.ipynb

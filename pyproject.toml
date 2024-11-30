@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "rayemb"
+version = "1.0.0"
+description = "CLI and Library for RayEmb project"
+authors = ["Pragyanstha <pragyanstha@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10.12"
+torch = "^2.5.1"
+lightning = "^2.4.0"
+opencv-python = "^4.10.0.84"
+beartype = "^0.19.0"
+h5py = "^3.12.1"
+jaxtyping = "^0.2.34"
+click = "^8.1.7"
+nibabel = "^5.3.0"
+diffdrr = { path = "libs/diffdrr" }
+numpy = "^2.1.2"
+wandb = "^0.18.3"
+kornia = "^0.7.3"
+loguru = "^0.7.2"
+
+[tool.poetry.scripts]
+rayemb = "rayemb.cli:cli"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

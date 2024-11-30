@@ -1,7 +1,16 @@
+# To ignore
+data/
+!data/README.md
+results/
+wandb/
+checkpoints/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+.python-version
 
 # C extensions
 *.so

@@ -20,10 +20,11 @@ numpy = "^2.1.2"
 wandb = "^0.18.3"
 kornia = "^0.7.3"
 loguru = "^0.7.2"
+requests = "^2.32.3"
+tqdm = "^4.67.1"
 
 [tool.poetry.scripts]
 rayemb = "rayemb.cli:cli"
-
 
 [build-system]
 requires = ["poetry-core"]

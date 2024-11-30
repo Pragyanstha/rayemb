@@ -1,5 +1,5 @@
 # To ignore
-data/
+data/*
 !data/README.md
 results/
 wandb/

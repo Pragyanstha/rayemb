@@ -5,7 +5,7 @@ Arbitrary Landmark Detection in X-Ray Images Using Ray Embedding Subspace
 
 [![Paper](http://img.shields.io/badge/cs.CV-2410.08152-B31B1B.svg)](https://arxiv.org/abs/2410.08152)
 [![Conference](http://img.shields.io/badge/ACCV-2024-4b44ce.svg)](https://accv2024.org/)
-[![Project](https://img.shields.io/badge/project_page-rayemb-blue.svg)](https://opensource.org/licenses/MIT)
+[![Project](https://img.shields.io/badge/project_page-rayemb-blue.svg)](https://pragyanstha.github.io/rayemb/)
 
 <!-- ![CI testing](https://github.com/PyTorchLightning/deep-learning-project-template/workflows/CI%20testing/badge.svg?branch=master&event=push)
  -->

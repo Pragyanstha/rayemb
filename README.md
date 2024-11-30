@@ -15,6 +15,14 @@ Conference
 -->   
 </div>
 
+![teaser](./assets/concept.png)
+Comparison of landmark detection results between conventional fixed landmark
+estimation and our arbitrary landmark estimation method. The 3D landmarks are
+shown in magenta on the left, while the estimated 2D landmarks are displayed in
+cyan and the ground truth in magenta on the right. Our method can generate a large
+number of corresponding pairs of 3D landmarks and 2D projections, whereas the fixed
+landmark estimation approach is limited to the pre-annotated landmarks.
+
 ## Overview
 
 RayEmb introduces a novel approach for detecting arbitrary landmarks in X-ray images using ray embedding subspace. Our approach represents 3D points as distinct subspaces, formed by feature vectors (referred to as ray embeddings) corresponding to intersecting rays.

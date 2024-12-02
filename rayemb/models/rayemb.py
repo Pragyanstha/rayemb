@@ -130,7 +130,13 @@ class RayEmb(pl.LightningModule):
             'localization_error': localization_error
         }
 
-    def inference(self, img, templates, sample_points, proj_matrices, template_sensor_size=512, return_features=False):
+    def inference(self, 
+                  img, 
+                  templates, 
+                  sample_points, 
+                  proj_matrices, 
+                  template_sensor_size=512, 
+                  return_features=False):
         """
         img: [3, 224, 224]
         templates: [T, 3, 224, 224]
@@ -179,52 +185,6 @@ class RayEmb(pl.LightningModule):
             return sim.reshape(N, self.image_size, self.image_size), query_features, projected_features, subpsace_projections[0]
         else:
             return sim.reshape(N, self.image_size, self.image_size)
-
-    def test_time_optimization(self, img, templates, sample_points, proj_matrices, template_sensor_size=512):
-        """
-        img: [3, 224, 224]
-        templates: [T, 3, 224, 224]
-        sample_points: [N, 3]
-        proj_matrices: [T, 3, 4]
-        """
-        T = templates.shape[0]
-        N = sample_points.shape[0]
-        img = img.unsqueeze(0)
-        templates = templates.unsqueeze(0)
-
-        img_descriptors, template_descriptors = self.forward_features(img, templates) # [B, 224, 224, D], [B*T, 224, 224, D]
-
-        # Calculate proj_point_templates
-        proj_point_templates = torch.matmul(proj_matrices, torch.cat([sample_points, torch.ones(sample_points.shape[0], 1).to(sample_points.device)], dim=1).T[None, ...])
-        proj_point_templates = proj_point_templates[:,:,:].permute(0, 2, 1) # (T, N, 3)
-        proj_point_templates = proj_point_templates[:, :, :2] / proj_point_templates[:, :, 2:]
-        proj_point_templates = proj_point_templates / template_sensor_size * self.image_size
-
-        proj_point_templates.clip_(0, self.image_size-1)
-        # rescale to -1 to 1
-        proj_point_templates = (proj_point_templates / (self.image_size-1)) * 2 - 1 # [T, N , 2]
-
-        # Grid sample template descriptors using proj_point_templates
-        template_descriptors = template_descriptors.permute(0, 3, 1, 2) # [B*T, D, 224, 224]
-        selected_template_descriptors = torch.nn.functional.grid_sample(
-            template_descriptors,
-            proj_point_templates[:, :, None, :], # [B*T, N, 1, 2]
-            mode='bilinear',
-            align_corners=True
-        ).squeeze(-1).permute(2, 0, 1) # [N, B*T, D]
-        selected_template_descriptors = rearrange(selected_template_descriptors, 'n (b t) c -> b n t c', b=1, t=T) # [B, N, T, D]
-        subpsace_projections = self.calc_subspace_matrix(selected_template_descriptors)
-
-        anchor_projection_matrices = subpsace_projections # [B, N, D, D]
-        query_features = rearrange(img_descriptors, 'b h w d -> b d (h w)')
-        query_features = query_features.unsqueeze(1).repeat(1, N, 1, 1) # [B, N, D, (H W)]
-        projected_features = anchor_projection_matrices @ query_features # [B, N, D, (H W)]
-
-        query_features = rearrange(query_features, 'b n d e -> (b n) e d')
-        projected_features = rearrange(projected_features, 'b n d e -> (b n) e d')
-
-        sim = self.similarity_fn(query_features, projected_features)
-        return sim.reshape(N, self.image_size, self.image_size)
 
     def log_heatmaps(self, pred_heatmaps, gt_proj_points, phase="train"):
         """

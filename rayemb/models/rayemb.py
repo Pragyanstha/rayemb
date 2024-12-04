@@ -7,7 +7,6 @@ from torchvision.utils import make_grid
 import torch.nn.functional as F
 from einops import rearrange
 import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from rayemb.utils import find_batch_peak_coordinates
@@ -196,6 +195,7 @@ class RayEmb(pl.LightningModule):
         step (int): Current step or batch_idx.
         phase (str): Phase of training, e.g., 'train', 'val'.
         """
+        matplotlib.use('Agg')
         # Convert PyTorch tensors to numpy arrays for visualization
         if torch.is_tensor(pred_heatmaps):
             # pred_heatmaps = torch.sigmoid(pred_heatmaps)  # Convert logits to probabilities if not done earlier

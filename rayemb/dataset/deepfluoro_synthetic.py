@@ -11,7 +11,7 @@ import os
 
 from diffdrr.pose import RigidTransform
 from .deepfluoro import DeepFluoroDataset
-from rayemb.utils import sample_grid_from_mask, Transforms
+from rayemb.utils import sample_grid_from_mask 
 
 
 class SyntheticDeepFluoroDataset(Dataset):

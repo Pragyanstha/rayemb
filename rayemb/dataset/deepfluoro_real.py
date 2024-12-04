@@ -9,7 +9,7 @@ import numpy as np
 
 from diffdrr.pose import RigidTransform
 from .deepfluoro import DeepFluoroDataset 
-from rayemb.utils import sample_grid_volume_from_ct, Transforms
+from rayemb.utils import sample_grid_volume_from_ct
 
 
 class RealDeepFluoroDataset(Dataset):

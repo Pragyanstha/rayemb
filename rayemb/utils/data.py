@@ -1,10 +1,10 @@
 from diffdrr.drr import DRR
 from diffdrr.pose import RigidTransform, convert
-from rayemb.dataset.deepfluoro import DeepFluoroDataset
 from beartype import beartype
 import torch
 
 def load(id_number, height, device):
+    from rayemb.dataset.deepfluoro import DeepFluoroDataset
     specimen = DeepFluoroDataset(id_number, filename="data/ipcai_2020_full_res_data.h5", preprocess=True)
     isocenter_pose = specimen.isocenter_pose.to(device)
 

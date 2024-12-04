@@ -65,7 +65,8 @@ Commands:
 
 Download the original DeepFluoro dataset (only the real x-raysfor testing) using the following command:
 ```bash
-rayemb download deepfluoro --data_dir ./data
+rayemb download deepfluoro \
+--data_dir ./data
 ```
 Preprocess the DeepFluoro dataset to get the templates using the following command:
 ```bash
@@ -73,13 +74,21 @@ sh scripts/generate/template_deepfluoro.sh
 ```
 Download the RayEmb-CTPelvic1k checkpoint using the following command:
 ```bash
-rayemb download checkpoint --checkpoint_dir ./checkpoints --model rayemb --dataset ctpelvic1k
+rayemb download checkpoint \
+--checkpoint_dir ./checkpoints \
+--model rayemb \
+--dataset ctpelvic1k
 ```
 This can be used to evaluate the model on the CTPelvic1k dataset as well as DeepFluoro dataset.
 
 ## Evaluation
 ```bash
-rayemb evaluate arbitrary-landmark deepfluoro --checkpoint_path ./checkpoints/rayemb-ctpelvic1k.ckpt --num_templates 4 --image_size 224 --template_dir ./data/deepfluoro_templates --data_dir ./data/ipcai_2020_full_res_data.h5
+rayemb evaluate arbitrary-landmark deepfluoro \
+--checkpoint_path ./checkpoints/rayemb-ctpelvic1k.ckpt \
+--num_templates 4 \
+--image_size 224 \
+--template_dir ./data/deepfluoro_templates \
+--data_dir ./data/ipcai_2020_full_res_data.h5
 ```
 
 ## Plans

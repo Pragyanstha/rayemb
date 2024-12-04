@@ -52,7 +52,7 @@ def run(inference, img, sampled_points, mesh, specimen_id, img_id, out_dir):
     trajectory_plotter = pv.Plotter(window_size=window_size)
     trajectory_plotter.add_title(f"{specimen_id}", font_size=8)
     trajectory_plotter.enable_anti_aliasing('ssaa')
-    trajectory_plotter.add_mesh(mesh, opacity=0.1, color="white", label="Volume Mesh")
+    trajectory_plotter.add_mesh(mesh, opacity=0.3, color="white", label="Volume Mesh")
     camera = trajectory_plotter.camera
     L = 200
     H = 200
@@ -72,7 +72,7 @@ def run(inference, img, sampled_points, mesh, specimen_id, img_id, out_dir):
                      cmap="magma", 
                      line_width=4, 
                      label="Trajectory")
-    ball_point = pv.Sphere(radius=0.5, center=trajectory[0])
+    ball_point = pv.Sphere(radius=1.0, center=trajectory[0])
     ball_actor = trajectory_plotter.add_mesh(ball_point, color="blue", opacity=0.8, label="Start Point")
     trajectory_plotter.remove_scalar_bar()
 

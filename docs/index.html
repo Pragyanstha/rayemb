@@ -1,1 +1,373 @@
-under construction
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="RayEmb: Arbitrary Landmark Estimation in X-Ray Images Using Ray Embedding Subspace">
+  <meta property="og:title" content="RayEmb: Arbitrary Landmark Estimation in X-Ray Images Using Ray Embedding Subspace"/>
+  <meta property="og:description" content="RayEmb: Arbitrary Landmark Estimation in X-Ray Images Using Ray Embedding Subspace"/>
+  <meta property="og:url" content="https://pragyanstha.github.io/rayemb"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/images/overview.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="RayEmb: Arbitrary Landmark Estimation in X-Ray Images Using Ray Embedding Subspace">
+  <meta name="twitter:description" content="RayEmb: Arbitrary Landmark Estimation in X-Ray Images Using Ray Embedding Subspace">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/icon.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="X-ray, landmark, correspondence, subspace, 2d-3d registration">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>RayEmb</title>
+  <link rel="icon" type="image/x-icon" href="static/images/icon.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">RayEmb</h1>
+            <h2 class="title is-2 publication-title">Arbitrary Landmark Estimation in X-Ray Images Using Ray Embedding Subspace</h2>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://github.com/Pragyanstha" target="_blank">Pragyan Shrestha</a><sup>*</sup>,</span>
+                <span class="author-block">
+                  Chun Xie,</span>
+                  <span class="author-block">
+                    Yuichi Yoshii
+                  </span>
+                    <span class="author-block">
+                      Itaru Kitahara
+                    </span> 
+                    </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">University of Tsukuba, Tokyo Medical University<br>ACCV 2024 (Oral)</span>
+                    <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="https://openaccess.thecvf.com/content/ACCV2024/papers/Shrestha_RayEmb_Arbitrary_Landmark_Detection_in_X-Ray_Images_Using_Ray_Embedding_ACCV_2024_paper.pdf" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                    <!-- Supplementary PDF link -->
+                    <span class="link-block">
+                      <a href="https://openaccess.thecvf.com/content/ACCV2024/supplemental/Shrestha_RayEmb_Arbitrary_Landmark_ACCV_2024_supplemental.pdf" target="_blank"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span>
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/Pragyanstha/rayemb" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- Demo Link -->
+                <span class="link-block">
+                  <a href="/Pragyanstha/demo" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-globe"></i>
+                  </span>
+                  <span>Demo</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+        <img src="static/images/teaser.gif" />
+      <h2 class="subtitle has-text-centered">
+        This illustration shows a randomly walking 3D point in the CT volume and its corresponding 2D projections (blue dot is the prediction, red dot is the ground truth) from the estimated heatmap in X-ray images.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Intra-operative 2D-3D registration of X-ray images with pre-operatively acquired CT scans is a crucial procedure in orthopedic surgeries. Anatomical landmarks pre-annotated in the CT volume can be detected in X-ray images to establish 2D-3D correspondences, which are then utilized for registration. However, registration often fails in certain view angles due to poor landmark visibility. We propose a novel method to address this issue by detecting arbitrary landmark points in X-ray images. Our approach represents 3D points as distinct subspaces, formed by feature vectors (referred to as ray embeddings) corresponding to intersecting rays. Establishing 2D-3D correspondences then becomes a task of finding ray embeddings that are close to a given subspace, essentially performing an intersection test. Unlike conventional methods for landmark estimation, our approach eliminates the need for manually annotating fixed landmarks. We trained our model using the synthetic images generated from CTPelvic1K CLINIC dataset, which contains 103 CT volumes, and evaluated it on the DeepFluoro dataset, comprising real X-ray images. Experimental results demonstrate the superiority of our method over conventional methods
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Image carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+       <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/concept.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Comparing landmark detection between conventional fixed landmark estimation.
+        </h2>
+      </div>
+  </div>
+</div>
+</section>
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Ray Embedding</h2>
+        <div class="content has-text-justified">
+          <p>
+            Estimating correspondences for arbitrary landmark points between 2D and 3D
+            representations poses significant challenges due to the mismatch in spatial dimensions and the transmissive properties of X-rays, which can associate multiple
+            3D points with a single 2D projection. To address this, we employ a pixel-wise
+            feature extractor and pre-render DRR templates to represent a 3D point as a
+            subspace. The pixel-wise features are referred to as ray embeddings, as we associate the feature vector to its back-projected ray. Since a 3D point can be
+            represented by a collection of intersecting rays, a set of ray embeddings can be
+            associated with a 3D point if their underlying rays intersect. The 2D projection of a 3D point can then be identified by evaluating the closeness of the ray
+            embeddings in the query image to the subspace representing the 3D point
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+       <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/overview.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Method Overview
+        </h2>
+      </div>
+  </div>
+</div>
+
+
+</section>
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Registration</h2>
+        <div class="content has-text-justified">
+          <p>
+            Once the correspondences are established, the perspectiven-point algorithm [1] with marginalizing sample and consensus (MAGSAC) [2]
+            is used to obtain the initial pose estimate. This estimate serves as initialization
+            for DiffDRR [3], a gradient-based optimization refinement module. The core
+            idea is to provide pose estimator with large amount of corresponding pairs of
+            3D landmarks and its 2D projections. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+       <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/compare.png" alt="MY ALT TEXT"/>
+      </div>
+  </div>
+</div>
+</section>
+
+<!-- References section -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">References</h2>
+        <div class="content has-text-justified">
+          <p>
+            [1] Lu, X.X.: A review of solutions for perspective-n-point problem in camera pose
+            estimation. J. Phys. Conf. Ser. 1087(5), 052009 (Sep 2018).<br>
+            [2] Barath, D., Matas, J., Noskova, J.: MAGSAC: Marginalizing sample consensus.
+            In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern
+            Recognition. pp. 10197-10205 (2019).<br>
+            [3] Gopalakrishnan, V., Golland, P.: Fast auto-differentiable digitally reconstructed
+            radiographs for solving inverse problems in intraoperative imaging. In: Clinical
+            Image-Based Procedures, pp. 1-11. Lecture notes in computer science, Springer
+            Nature Switzerland, Cham (2023).<br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End references section -->
+<!-- Youtube video -->
+<!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Video Presentation</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End youtube video -->
+
+
+<!-- Video carousel -->
+<!-- <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Another Carousel</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/carousel1.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video2">
+          <video poster="" id="video2" autoplay controls muted loop height="100%">
+            <source src="static/videos/carousel2.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video3">
+          <video poster="" id="video3" autoplay controls muted loop height="100%">\
+            <source src="static/videos/carousel3.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- End video carousel -->
+
+
+
+
+
+
+<!-- Paper poster -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">Poster</h2>
+
+      <iframe  src="static/pdfs/poster.pdf" width="100%" height="550">
+          </iframe>
+        
+      </div>
+    </div>
+  </section>
+<!--End paper poster -->
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{Shrestha2024RayEmbAL,
+        title={RayEmb: Arbitrary Landmark Detection in X-Ray Images Using Ray Embedding Subspace},
+        author={Pragyan Shrestha and Chun Xie and Yuichi Yoshii and Itaru Kitahara},
+        journal={ArXiv},
+        year={2024},
+        volume={abs/2410.08152},
+        url={https://api.semanticscholar.org/CorpusID:273233675}
+      }</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a>.<br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>

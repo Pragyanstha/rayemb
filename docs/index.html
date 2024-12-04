@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4YLJKT3CVM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-4YLJKT3CVM');
+  </script>
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
@@ -131,7 +140,7 @@
     <div class="hero-body">
         <img src="static/images/teaser.gif" />
       <h2 class="subtitle has-text-centered">
-        The animation shows a randomly walking 3D point inside the CT volume and its corresponding 2D projection (blue dot is the prediction, red dot is the ground truth) from the estimated heatmap for an X-ray image.
+        A randomly walking 3D point inside the CT volume and its corresponding 2D projection (blue dot is the prediction, red dot is the ground truth) from the estimated heatmap for an X-ray image.
       </h2>
     </div>
   </div>
@@ -332,14 +341,14 @@
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@article{Shrestha2024RayEmbAL,
-        title={RayEmb: Arbitrary Landmark Detection in X-Ray Images Using Ray Embedding Subspace},
-        author={Pragyan Shrestha and Chun Xie and Yuichi Yoshii and Itaru Kitahara},
-        journal={ArXiv},
-        year={2024},
-        volume={abs/2410.08152},
-        url={https://api.semanticscholar.org/CorpusID:273233675}
-      }</code></pre>
+      <pre><code>@InProceedings{Shrestha_2024_ACCV,
+        author    = {Shrestha, Pragyan and Xie, Chun and Yoshii, Yuichi and Kitahara, Itaru},
+        title     = {RayEmb: Arbitrary Landmark Detection in X-Ray Images Using Ray Embedding Subspace},
+        booktitle = {Proceedings of the Asian Conference on Computer Vision (ACCV)},
+        month     = {December},
+        year      = {2024},
+        pages     = {665-681}
+    }</code></pre>
     </div>
 </section>
 <!--End BibTex citation -->

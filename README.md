@@ -107,12 +107,12 @@ We would like to thank [eigenvivek](https://github.com/eigenvivek) for his aweso
 ## Citations
 If you find our work helpful for your research, please consider citing the following BibTeX entry.
 ```
-@article{Shrestha2024RayEmbAL,
-  title={RayEmb: Arbitrary Landmark Detection in X-Ray Images Using Ray Embedding Subspace},
-  author={Pragyan Shrestha and Chun Xie and Yuichi Yoshii and Itaru Kitahara},
-  journal={ArXiv},
-  year={2024},
-  volume={abs/2410.08152},
-  url={https://api.semanticscholar.org/CorpusID:273233675}
+@InProceedings{Shrestha_2024_ACCV,
+    author    = {Shrestha, Pragyan and Xie, Chun and Yoshii, Yuichi and Kitahara, Itaru},
+    title     = {RayEmb: Arbitrary Landmark Detection in X-Ray Images Using Ray Embedding Subspace},
+    booktitle = {Proceedings of the Asian Conference on Computer Vision (ACCV)},
+    month     = {December},
+    year      = {2024},
+    pages     = {665-681}
 }
 ```

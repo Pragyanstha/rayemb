@@ -108,7 +108,7 @@ async def lifespan(app: FastAPI):
     logger.info("Model loaded successfully")
     # Connect to Redis
     redis = aioredis.from_url("redis://localhost", decode_responses=True)
-    ct_path = "../data/CTPelvic1K/dataset6_volume/dataset6_CLINIC_0001_data.nii.gz"
+    ct_path = "../ui/public/test.nii.gz" # This is the downsized dataset6_CLINIC_0001_data
     xray_path = "../data/ctpelvic1k_synthetic/dataset6_CLINIC_0001_data/images/0010.png"
     camera_path = "../data/ctpelvic1k_synthetic/dataset6_CLINIC_0001_data/cameras/0010.json"
     template_path = "../data/ctpelvic1k_templates/dataset6_CLINIC_0001_data"

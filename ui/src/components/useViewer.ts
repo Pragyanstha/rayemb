@@ -12,7 +12,7 @@ export default function useViewer(niftiUrl: string, onNodeClick: (node: number[]
       };
       const canvas = useRef();
       const nv = new Niivue(defaults);
-      const connectomeUrl = "/connectome.json";
+      const connectomeUrl = "/assets/connectome.json";
       const currentNode = useRef<number[]>([0, 0, 0]);
 
       function updateNode(XYZmm: number[]) {

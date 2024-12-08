@@ -5,11 +5,11 @@ import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import Viewer from "./components/Viewer";
 import Heatmap from "./components/Heatmap";
 import { getImage, getHeatmap } from "./driver";
-import logo from "/icon.png";
+import logo from "/assets/icon.png";
 
 const App = () => {
 
-  const niftiUrl = "/test.nii.gz";
+  const niftiUrl = "/assets/test.nii.gz";
   const onNodeClick = (node: number[]) => {
     setIsLoading(true);
     getHeatmap(node).then(setHeatmapUrl).then(() => setIsLoading(false));

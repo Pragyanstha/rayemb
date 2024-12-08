@@ -23,26 +23,31 @@ cyan and the ground truth in magenta on the right. Our method can generate a lar
 number of corresponding pairs of 3D landmarks and 2D projections, whereas the fixed
 landmark estimation approach is limited to the pre-annotated landmarks.
 
-## Overview
+## 🔥 Updates
+- ```2024/12/09``` : [Interactive demo](https://pragyanstha.github.io/rayemb/demo) is live!
+- ```2024/12/04``` : [Project page](https://pragyanstha.github.io/rayemb/) is live!
+- ```2024/12/01``` : Code available.
+
+## ⭐ Overview
 
 RayEmb introduces a novel approach for detecting arbitrary landmarks in X-ray images using ray embedding subspace. Our approach represents 3D points as distinct subspaces, formed by feature vectors (referred to as ray embeddings) corresponding to intersecting rays.
 Establishing 2D-3D correspondences then becomes a task of finding ray embeddings that are close to a given subspace, essentially performing an intersection test.  
 
-## Features
+## 🚀 Features
 
 - A CLI for downloading data, preprocessing, training and evaluating models.
 - A PyTorch implementation of the RayEmb and FixedLandmark models.
 - [OpenCV](https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga549c2075fac14829ff4a58bc9317d6a9) based PnP + RANSAC based 2D-3D registration for initial pose estimates
 - [DiffDRR](https://github.com/eigenvivek/DiffDRR) based refinement module.
 
-## Requirements
+## 📚 Requirements
 
 - Python 3.10+
 - PyTorch 2.0+
 - CUDA 11.8+
 We have tested the code on a RTX 3090 and an H100 GPU.
 
-## Installation and Setup
+## 🛠️ Installation and Setup
 Install the dependencies using poetry.
 ```bash
 poetry install
@@ -81,7 +86,7 @@ rayemb download checkpoint \
 ```
 This can be used to evaluate the model on the CTPelvic1k dataset as well as DeepFluoro dataset.
 
-## Evaluation
+## 🎖️ Evaluation
 ```bash
 rayemb evaluate arbitrary-landmark deepfluoro \
 --checkpoint_path ./checkpoints/rayemb-ctpelvic1k.ckpt \
@@ -91,10 +96,10 @@ rayemb evaluate arbitrary-landmark deepfluoro \
 --data_dir ./data/ipcai_2020_full_res_data.h5
 ```
 
-## Plans
-- Update the readme for training, synthetic data generation and template generation.
-- Update the readme for the synthetic CTPelvic1k dataset.
-- Add typing and annotations to the codebase.
+## 🏷️ TODO
+- [x] Update the readme for evaluation, synthetic data generation and template generation.
+- [ ] Update the readme for training.
+- [ ] Add typing and annotations to the codebase.
 
 ## Contact
 

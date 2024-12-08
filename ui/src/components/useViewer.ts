@@ -47,14 +47,15 @@ export default function useViewer(niftiUrl: string, onNodeClick: (node: number[]
           nv.onMouseUp = (uiData) => {
             // @ts-ignore: fracPos is not defined in the type
             if (uiData.fracPos[0] < 0) return; //not on volume
+            // @ts-ignore: fracPos is not defined in the type
             const norm = (uiData.fracPos[0] - currentNode.current[0])**2 + (uiData.fracPos[1] - currentNode.current[1])**2 + (uiData.fracPos[2] - currentNode.current[2])**2;
             if (norm < 0.00001) {console.log("same node"); return;};
             // @ts-ignore: fracPos is not defined in the type
             let XYZmmVec = nv.frac2mm(uiData.fracPos);
             let XYZmm = [XYZmmVec[0], XYZmmVec[1], XYZmmVec[2]];
-            console.log("XYZmm", XYZmm);
             updateNode(XYZmm);
             onNodeClick(XYZmm);
+            // @ts-ignore: fracPos is not defined in the type
             currentNode.current = uiData.fracPos;
           }
         }

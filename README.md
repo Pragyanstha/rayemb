@@ -98,6 +98,7 @@ rayemb evaluate arbitrary-landmark deepfluoro \
 
 ## 🏷️ TODO
 - [x] Update the readme for evaluation, synthetic data generation and template generation.
+- [ ] Update demo app to support user uploads, and add instructions for running the app locally.
 - [ ] Update the readme for training.
 - [ ] Add typing and annotations to the codebase.
 

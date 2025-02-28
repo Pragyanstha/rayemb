@@ -2,7 +2,8 @@ import logging
 import traceback  
 from typing import List
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, File, UploadFile
+from io import BytesIO
 from pydantic import BaseModel
 from fastapi.responses import FileResponse
 import torch
@@ -20,12 +21,20 @@ import aioredis
 import io
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+import tempfile
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 model = None
 redis = None
+
+# Add this near the top of the file with other constants
+UPLOAD_DIR = "../tmp"  # You can change this path to your preferred directory
+
+# Ensure upload directory exists
+os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 class Location(BaseModel):
     x: float
@@ -96,7 +105,7 @@ async def lifespan(app: FastAPI):
     global redis
     global spacing
     global ct_transform
-    global query_projection_matrix
+    # global query_projection_matrix
     model = RayEmbSubspaceInference.load_from_checkpoint(
         checkpoint_path=CHECKPOINT_PATH,
         map_location=device,
@@ -108,7 +117,7 @@ async def lifespan(app: FastAPI):
     logger.info("Model loaded successfully")
     # Connect to Redis
     redis = aioredis.from_url("redis://localhost", decode_responses=True)
-    ct_path = "../ui/public/test.nii.gz" # This is the downsized dataset6_CLINIC_0001_data
+    ct_path = "../ui/public/assets/test.nii.gz" # This is the downsized dataset6_CLINIC_0001_data
     xray_path = "../data/ctpelvic1k_synthetic/dataset6_CLINIC_0001_data/images/0010.png"
     camera_path = "../data/ctpelvic1k_synthetic/dataset6_CLINIC_0001_data/cameras/0010.json"
     template_path = "../data/ctpelvic1k_templates/dataset6_CLINIC_0001_data"
@@ -123,7 +132,7 @@ async def lifespan(app: FastAPI):
     spacing = np.array(ct_img.header.get_zooms())
     image_array = np.array(Image.open(xray_path))
     image_array = np.repeat(image_array[..., np.newaxis], 3, axis=-1)
-    query_projection_matrix = np.array(json.load(open(camera_path))["proj"])[0]
+    # query_projection_matrix = np.array(json.load(open(camera_path))["proj"])[0]
     model.set_templates(template_path)
     model.set_image(image_array)
     model.calc_features()
@@ -181,6 +190,41 @@ async def get_xray():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/image/xray")
+async def set_xray(file: UploadFile = File(...)):
+    global model, redis
+    model, redis = check_model_and_redis(model, redis)
+    try:
+        # Create a file path in the specified directory
+        file_path = os.path.join(UPLOAD_DIR, file.filename)
+        
+        # Read and save the uploaded file
+        contents = await file.read()
+        with open(file_path, "wb") as f:
+            f.write(contents)
+
+        # Store the file path in Redis
+        await redis.set("xray", file_path)
+        
+        # Process the image for the model
+        image = Image.open(BytesIO(contents))
+        image_array = np.array(image)
+        if len(image_array.shape) == 2:  # If grayscale, convert to RGB
+            image_array = np.repeat(image_array[..., np.newaxis], 3, axis=-1)
+        
+        # Update the model with new image
+        model.set_image(image_array)
+        model.calc_features()
+        
+        return {"success": True, "filename": file.filename}
+    except Exception as e:
+        # Clean up file in case of error
+        if 'file_path' in locals():
+            os.unlink(file_path)
+        tb_info = traceback.format_exc()
+        logger.error(tb_info)
+        raise HTTPException(status_code=500, detail=str(e))
+
 # @app.post("/image/xray")
 # async def set_xray(image_path: str = "../data/ctpelvic1k_synthetic_v2/dataset6_CLINIC_0001_data/images/0010.png"):
 #     global model, redis
@@ -211,12 +255,12 @@ async def inference(sampled_points: List[Location] = [Location(x=0, y=0, z=0)]):
         sims = model.inference(sampled_points_tensor)
         pred_proj_point, max_vals = find_batch_peak_coordinates_maxval(sims)
         pred_proj_point = pred_proj_point.cpu().numpy()[0]
-        gt_proj_point = query_projection_matrix @ np.concatenate([sampled_points_np, np.ones((sampled_points_np.shape[0], 1))], axis=-1).T
-        gt_proj_point = gt_proj_point[:2, :] / gt_proj_point[2, :]
-        gt_proj_point = gt_proj_point.T[0] # (N, 2)
+        # gt_proj_point = query_projection_matrix @ np.concatenate([sampled_points_np, np.ones((sampled_points_np.shape[0], 1))], axis=-1).T
+        # gt_proj_point = gt_proj_point[:2, :] / gt_proj_point[2, :]
+        # gt_proj_point = gt_proj_point.T[0] # (N, 2)
         # gt_proj_point = 224 - gt_proj_point
         heatmap = sims[0].cpu().numpy()
-        return numpy_to_colormap_image_response(heatmap, pred_proj_point, gt_proj_point)
+        return numpy_to_colormap_image_response(heatmap, pred_proj_point)
     except Exception as e:
         tb_info = traceback.format_exc()
         logger.error(tb_info)

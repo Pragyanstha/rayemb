@@ -24,13 +24,15 @@ export function getHeatmap(xyz: number[]) {
         });
 }
 
-// Not used until I figure out how to manage sessions per user
-// export function setXray(path: string = "") {
-//     if (path === "") {
-//         return axios.post(`${apiUrl}/image/xray`);
-//     }
-//     return axios.post(`${apiUrl}/image/xray`, { image_path: path });
-// }
+export function setXray(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return axios.post(`${apiUrl}/image/xray`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+}
 
 // export function setCT(ct_path: string = "", template_path: string = "") {
 //     if (ct_path === "" && template_path === "") {

@@ -12,6 +12,7 @@ from rayemb.models import RayEmb, FixedLandmark
 from rayemb.dataset import (
     SyntheticDeepFluoroDataModule,
     SyntheticCTPelvic1KDataModule,
+    CustomDataModule,
 )
 from rayemb.utils import cosine_similarity, setup_logger
 
@@ -144,6 +145,23 @@ def ctpelvic1k(**args):
         sampling_distance=config.sampling_distance,
         batch_size=config.batch_size,              # Batch size
         num_workers=config.num_workers,             # Number of workers for data loading,
+        sample_only_visible=True
+    )
+    train_rayemb(data_module, config)
+
+@arbitrary_landmark.command()
+@common_options
+@click.option('--input_file', type=str, default='data/CTPelvic1K/dataset6_volume/specimen_000000.nii.gz', help='Directory containing the volume files')
+def custom(**args):
+    config = Config(**args)
+    data_module = CustomDataModule(
+        data_dir=config.data_dir,           # Directory containing the dataset
+        image_size=config.image_size,             # Image size
+        template_dir=config.template_dir,
+        num_samples=config.num_samples,
+        num_templates=config.num_templates,
+        batch_size=config.batch_size,
+        num_workers=config.num_workers,
         sample_only_visible=True
     )
     train_rayemb(data_module, config)

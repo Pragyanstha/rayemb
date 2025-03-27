@@ -28,13 +28,13 @@ from torchvision.transforms import Compose, Lambda, Normalize, Resize
 
 
 @beartype
-def get_random_offset_wrist(batch_size: int, device) -> RigidTransform:
-    r1 = torch.distributions.Normal(0, 0.5).sample((batch_size,))
-    r2 = torch.distributions.Normal(0, 0.5).sample((batch_size,))
-    r3 = torch.distributions.Normal(0, 0.5).sample((batch_size,))
-    t1 = torch.distributions.Normal(0, 10).sample((batch_size,))
-    t2 = torch.distributions.Normal(250, 10).sample((batch_size,))
-    t3 = torch.distributions.Normal(0, 10).sample((batch_size,))
+def get_random_offset_params(batch_size: int, params: dict, device) -> RigidTransform:
+    r1 = torch.distributions.Normal(0, params["r1"]).sample((batch_size,))
+    r2 = torch.distributions.Normal(0, params["r2"]).sample((batch_size,))
+    r3 = torch.distributions.Normal(0, params["r3"]).sample((batch_size,))
+    t1 = torch.distributions.Normal(params["t1"][0], params["t1"][1]).sample((batch_size,))
+    t2 = torch.distributions.Normal(params["t2"][0], params["t2"][1]).sample((batch_size,))
+    t3 = torch.distributions.Normal(params["t3"][0], params["t3"][1]).sample((batch_size,))
     log_R_vee = torch.stack([r1, r2, r3], dim=1).to(device)
     log_t_vee = torch.stack([t1, t2, t3], dim=1).to(device)
     return convert(

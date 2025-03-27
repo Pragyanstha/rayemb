@@ -111,10 +111,50 @@ npm run dev
 ```
 Visit `http://localhost:5173/` to see the demo app.
 
+## 📔 Training and Testing Custom Data
+Below is an example for generating templates and training data from a single Nifti file. If you want to generate templates and images for multiple Nifti files, 
+you can write a shell script to loop through the files and generate templates and images, please refer to the [generate](./scripts/generate/template_ctpelvic1k.sh) command for more details.
+
+```bash
+rayemb generate template custom \
+--input_file <path_to_nifti_file> \
+--output_dir <path_to_output_templates_dir> \
+--height <image_height> \
+--steps <number_of_steps> \
+--pixel_size <pixel_size> \
+--source_to_detector_distance <source_to_detector_distance>
+```
+
+Now, we can generate the training and testing images using the following command:
+```bash
+rayemb generate dataset custom \
+--input_file <path_to_nifti_file> \
+--mask_dir <path_to_mask_dir> \ # optional, if not provided, a mask will be generated using the threshold
+--threshold <threshold> \ # only used if mask_dir is not provided
+--output_dir <path_to_output_images_dir> \
+--height <image_height> \
+--num_samples <number_of_samples> \
+--device <device> \
+--source_to_detector_distance <source_to_detector_distance> \
+--pixel_size <pixel_size> \
+```
+
+Split the generated images into training and validation sets using the following command:
+```bash
+rayemb generate splits \
+--data_dir <path_to_data_dir> \
+--type custom \
+--split_ratio <split_ratio>
+```
+
+Train the model using the following command:
+```bash
+sh scripts/train/rayemb_custom.sh <path_to_data_dir> <path_to_template_dir>
+```
+
 ## 🏷️ TODO
 - [x] Update the readme for evaluation, synthetic data generation and template generation.
-- [ ] Update demo app to support user uploads, and add instructions for running the app locally.
-- [ ] Update the readme for training.
+- [x] Update the readme for training.
 - [ ] Add typing and annotations to the codebase.
 
 ## Contact

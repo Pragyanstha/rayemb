@@ -1,13 +1,13 @@
 import React from "react";
-import useViewer from "./useViewer";
+import useViewer from "../hooks/useViewer";
 
 
-interface ViewerProps {
+interface ThreeDViewerProps {
   niftiUrl: string;
   onNodeClick: (node: number[]) => void;
 }
 
-const Viewer = ({ niftiUrl, onNodeClick }: ViewerProps) => {
+const ThreeDViewer = ({ niftiUrl, onNodeClick }: ThreeDViewerProps) => {
 
   const { canvas } = useViewer(niftiUrl, onNodeClick);
 
@@ -15,4 +15,4 @@ const Viewer = ({ niftiUrl, onNodeClick }: ViewerProps) => {
     <canvas ref={canvas} height="100%"/>
   </div>;
 };
-export default Viewer
+export default ThreeDViewer

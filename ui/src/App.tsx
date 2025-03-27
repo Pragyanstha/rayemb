@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { AppBar, Toolbar, Typography, IconButton } from "@mui/material";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import Viewer from "./components/Viewer";
-import Heatmap from "./components/Heatmap";
+import ThreeDViewer from "./components/ThreeDViewer";
+import ImageViewer from "./components/ImageViewer";
 import { getImage, getHeatmap } from "./driver";
 import logo from "/assets/icon.png";
-
+import useImageViewer from "./hooks/useImageViewer";
 const App = () => {
 
   const niftiUrl = "/assets/test.nii.gz";
@@ -23,6 +23,7 @@ const App = () => {
     getImage().then(setImageUrl).then(() => setIsLoading(false));
   }, []);
 
+  const { uploadImage } = useImageViewer(setImageUrl);
   return (
     <div style={{ height: "100vh", display: "flex", gap:"10px", flexDirection: "column" }}>
       <AppBar position="static" sx={{ width: "100vw", height: "60px" }}>
@@ -42,8 +43,8 @@ const App = () => {
         </Toolbar>
       </AppBar>
       <div style={{ flex: 1.0, maxHeight: "calc(100vh - 120px)", paddingLeft: "10px", width: "100%", display: "flex", justifyContent: "space-between", flexDirection: "row"}} >
-          <Viewer niftiUrl={niftiUrl} onNodeClick={onNodeClick} />
-          <Heatmap imageUrl={imageUrl} heatmapUrl={heatmapUrl} isLoading={isLoading} />
+          <ThreeDViewer niftiUrl={niftiUrl} onNodeClick={onNodeClick} />
+          <ImageViewer imageUrl={imageUrl} heatmapUrl={heatmapUrl} isLoading={isLoading} uploadImage={uploadImage} />
       </div>
       <AppBar position="static" color="primary" sx={{ marginBottom: "0", width: "100vw", height: "40px"}}>
       <Typography variant="h6" sx={{ height: "100%", backgroundColor: "primary.main", textAlign: "right", fontSize: "12px", paddingRight: "10px", paddingTop: "10px" }}>

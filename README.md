@@ -96,6 +96,21 @@ rayemb evaluate arbitrary-landmark deepfluoro \
 --data_dir ./data/ipcai_2020_full_res_data.h5
 ```
 
+## 🎉 Running the demo app locally
+We use fastapi as the backend and vite react as the frontend so make sure you have node and npm installed.
+First, start the server.
+```bash
+cd server
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+Then, start the frontend.
+```bash
+cd ui
+npm install
+npm run dev
+```
+Visit `http://localhost:5173/` to see the demo app.
+
 ## 📔 Training and Testing Custom Data
 Below is an example for generating templates and training data from a single Nifti file. If you want to generate templates and images for multiple Nifti files, 
 you can write a shell script to loop through the files and generate templates and images, please refer to the [generate](./scripts/generate/template_ctpelvic1k.sh) command for more details.

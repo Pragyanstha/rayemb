@@ -48,13 +48,17 @@ Establishing 2D-3D correspondences then becomes a task of finding ray embeddings
 We have tested the code on a RTX 3090 and an H100 GPU.
 
 ## 🛠️ Installation and Setup
-Install the dependencies using poetry.
+Install the dependencies using uv (fast Python package manager).
 ```bash
-poetry install
+# Install uv if not already installed
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install all dependencies (including diffdrr)
+uv sync
 ```
-Check that rayemb-cli is in your path and is executable.
+Check that rayemb-cli is working.
 ```bash
-rayemb --help
+uv run rayemb --help
 ```
 ```
 Usage: rayemb [OPTIONS] COMMAND [ARGS]...
@@ -63,14 +67,29 @@ Options:
   --help  Show this message and exit.
 
 Commands:
+  download
   evaluate
   generate
   train
 ```
 
+### Alternative: Activate environment
+You can also activate the environment and run commands directly:
+```bash
+source .venv/bin/activate
+rayemb --help
+rayemb train --config my_config.yaml
+```
+
+### Why uv?
+- ⚡ **10-100x faster** than Poetry
+- 🎯 **Single command setup** - `uv sync` installs everything
+- 🔒 **Better dependency resolution**
+- 🐍 **Standard Python packaging** (pyproject.toml)
+
 Download the original DeepFluoro dataset (only the real x-raysfor testing) using the following command:
 ```bash
-rayemb download deepfluoro \
+uv run rayemb download deepfluoro \
 --data_dir ./data
 ```
 Preprocess the DeepFluoro dataset to get the templates using the following command:
@@ -79,7 +98,7 @@ sh scripts/generate/template_deepfluoro.sh
 ```
 Download the RayEmb-CTPelvic1k checkpoint using the following command:
 ```bash
-rayemb download checkpoint \
+uv run rayemb download checkpoint \
 --checkpoint_dir ./checkpoints \
 --model rayemb \
 --dataset ctpelvic1k
@@ -88,7 +107,7 @@ This can be used to evaluate the model on the CTPelvic1k dataset as well as Deep
 
 ## 🎖️ Evaluation
 ```bash
-rayemb evaluate arbitrary-landmark deepfluoro \
+uv run rayemb evaluate arbitrary-landmark deepfluoro \
 --checkpoint_path ./checkpoints/rayemb-ctpelvic1k.ckpt \
 --num_templates 4 \
 --image_size 224 \
@@ -101,7 +120,7 @@ We use fastapi as the backend and vite react as the frontend so make sure you ha
 First, start the server.
 ```bash
 cd server
-uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+uv run python main.py
 ```
 Then, start the frontend.
 ```bash
@@ -116,7 +135,7 @@ Below is an example for generating templates and training data from a single Nif
 you can write a shell script to loop through the files and generate templates and images, please refer to the [generate](./scripts/generate/template_ctpelvic1k.sh) command for more details.
 
 ```bash
-rayemb generate template custom \
+uv run rayemb generate template custom \
 --input_file <path_to_nifti_file> \
 --output_dir <path_to_output_templates_dir> \
 --height <image_height> \
@@ -127,7 +146,7 @@ rayemb generate template custom \
 
 Now, we can generate the training and testing images using the following command:
 ```bash
-rayemb generate dataset custom \
+uv run rayemb generate dataset custom \
 --input_file <path_to_nifti_file> \
 --mask_dir <path_to_mask_dir> \ # optional, if not provided, a mask will be generated using the threshold
 --threshold <threshold> \ # only used if mask_dir is not provided
@@ -141,7 +160,7 @@ rayemb generate dataset custom \
 
 Split the generated images into training and validation sets using the following command:
 ```bash
-rayemb generate splits \
+uv run rayemb generate splits \
 --data_dir <path_to_data_dir> \
 --type custom \
 --split_ratio <split_ratio>

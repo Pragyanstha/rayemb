@@ -1,41 +1,64 @@
-[tool.poetry]
+[project]
 name = "rayemb"
 version = "1.0.0"
 description = "CLI and Library for RayEmb project"
-authors = ["Pragyanstha <pragyanstha@gmail.com>"]
+authors = [
+    {name = "Pragyanstha", email = "pragyanstha@gmail.com"}
+]
 readme = "README.md"
+requires-python = ">=3.10.12"
+dependencies = [
+    "lightning>=2.4.0",
+    "opencv-python>=4.10.0.84",
+    "beartype>=0.19.0",
+    "h5py>=3.12.1",
+    "jaxtyping>=0.2.34",
+    "click>=8.1.7",
+    "nibabel>=5.3.0",
+    "numpy>=2.1.2",
+    "wandb>=0.18.3",
+    "kornia>=0.7.3",
+    "loguru>=0.7.2",
+    "requests>=2.32.3",
+    "tqdm>=4.67.1",
+    "fastapi>=0.115.6",
+    "aioredis>=2.0.1",
+    "python-multipart>=0.0.20",
+    "torch>=2.5.1",
+    "torchvision>=0.20.1",
+    "torchaudio>=2.5.1",
+    "imageio>=2.28.0",
+    "matplotlib>=3.5.0",
+    "scipy>=1.9.0",
+    "scikit-image>=0.19.0",
+    "pillow>=9.0.0",
+    "diffdrr @ file:///home/pragyan/Projects/rayemb/libs/diffdrr",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10.12"
-lightning = "^2.4.0"
-opencv-python = "^4.10.0.84"
-beartype = "^0.19.0"
-h5py = "^3.12.1"
-jaxtyping = "^0.2.34"
-click = "^8.1.7"
-nibabel = "^5.3.0"
-diffdrr = { path = "libs/diffdrr" }
-numpy = "^2.1.2"
-wandb = "^0.18.3"
-kornia = "^0.7.3"
-loguru = "^0.7.2"
-requests = "^2.32.3"
-tqdm = "^4.67.1"
-fastapi = "^0.115.6"
-aioredis = "^2.0.1"
-python-multipart = "^0.0.20"
-torch = {version = "^2.5.1", source = "torch_cu121"}
-torchvision = {version = "^0.20.1", source = "torch_cu121"}
-torchaudio = {version = "^2.5.1", source = "torch_cu121"}
-
-[tool.poetry.scripts]
+[project.scripts]
 rayemb = "rayemb.cli:cli"
 
-[[tool.poetry.source]]
+[project.urls]
+Homepage = "https://pragyanstha.github.io/rayemb/"
+Repository = "https://github.com/Pragyanstha/rayemb"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "black>=22.0.0",
+    "isort>=5.0.0",
+    "flake8>=4.0.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+# PyTorch CUDA 12.1 index
+[[tool.uv.index]]
 name = "torch_cu121"
 url = "https://download.pytorch.org/whl/cu121"
-priority = "explicit"
+explicit = true
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
